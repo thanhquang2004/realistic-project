@@ -1,10 +1,20 @@
-import { Box } from "@mui/material";
+import {
+  Box,
+  Icon,
+  IconButton,
+  SvgIcon,
+  Theme,
+  Typography,
+} from "@mui/material";
+import SideBarBody from "./SideBarBody/SideBarBody";
 
 function SideBar() {
   const SIDE_BAR_WIDTH = "253px";
-  const SIDE_BAR_HEADER_HEOGHT = "57px";
   const SIDE_BAR_FOOTER_HEIGHT = "51px";
-  const SIDE_BAR_BODY_HEIGHT = `calc(100vh - ${SIDE_BAR_HEADER_HEOGHT} - ${SIDE_BAR_FOOTER_HEIGHT})`;
+  const SIDE_BAR_BODY_HEIGHT = (theme: Theme) =>
+    `calc(100vh - ${theme.customVars.headerHeight} - ${SIDE_BAR_FOOTER_HEIGHT})`;
+
+  console.log(SIDE_BAR_BODY_HEIGHT);
   return (
     <Box
       sx={{
@@ -18,19 +28,23 @@ function SideBar() {
     >
       <Box
         sx={{
-          height: SIDE_BAR_HEADER_HEOGHT,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          paddingRight: "22px",
+          paddingLeft: "19px",
+          height: (theme) => theme.customVars.headerHeight,
           backgroundColor: "#0FA4C5",
         }}
       >
-        Header
+        <Typography variant="h6" color="white" fontSize="16px" fontWeight="700">
+          CMS LOGO
+        </Typography>
+        <IconButton>
+          <img src="/src/assets/li_menu.svg" alt="menu" sizes="16px"></img>
+        </IconButton>
       </Box>
-      <Box
-        sx={{
-          height: SIDE_BAR_BODY_HEIGHT,
-        }}
-      >
-        Body
-      </Box>
+      <SideBarBody SIDE_BAR_BODY_HEIGHT={SIDE_BAR_BODY_HEIGHT} />
       <Box
         sx={{
           height: SIDE_BAR_FOOTER_HEIGHT,
